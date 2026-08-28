@@ -1,0 +1,165 @@
+# TRPGCharacter 設定
+
+book:
+  title: "探索者シート"
+  author: "TRPG System"
+
+# 能力値がまだ設定されていないプレイヤーの初期値
+default-stat-value: 0
+
+# /roll と本からの判定結果を全体チャットに表示するか
+broadcast-rolls: true
+
+# 入力できる能力値・技能値の範囲
+input:
+  min: 0
+  max: 999
+
+messages:
+  prefix: "&6[TRPG]&r "
+
+
+# 画面右側の個別ステータス表示
+sidebar:
+  enabled: true
+  server-name: "MCTRPG Sever"
+  # 20tick = 1秒
+  update-interval: 20
+
+
+# Minecraft本体の体力・満腹度との同期
+health-sync:
+  # 能力値未設定時の即死防止用
+  safe-hp: 4
+  # trueで満腹度を常に最大固定
+  disable-hunger: true
+
+
+# HP/SAN低下時の危険演出
+danger-effects:
+  enabled: true
+
+  # 20tick = 1秒
+  # 40tickなら約2秒ごとに状態を確認
+  check-interval: 40
+
+  # 固定の3段階
+  # 50%以下: 軽度
+  # 25%以下: 中度
+  # 10%以下: 重度
+
+
+# 入室時の本人向け案内
+join-guide:
+  enabled: true
+
+
+# 暗所に入った際の「目星」自動判定と暗視
+dark-vision:
+  enabled: true
+
+  # この明るさ以下を暗所として扱う（Minecraftの明るさ 0～15）
+  light-level-threshold: 4
+
+  # 使用する技能ID
+  skill: "spot_hidden"
+
+  # 暗所判定の周期。20tick = 1秒
+  check-interval: 10
+
+  # 成功中に付与する暗視の残り時間。
+  # 暗所にいる間は定期的に更新され、明所へ出ると数秒で自然解除。
+  effect-refresh-ticks: 1200
+
+
+# 水中に入った際の「水泳」自動判定
+auto-swim:
+  enabled: true
+
+  # 使用する技能ID
+  skill: "swim"
+
+  # 水中判定の周期。20tick = 1秒
+  check-interval: 10
+
+  # 成功中に付与するイルカの好意の残り時間。
+  # 水中にいる間は更新され、水から出ると自然解除される。
+  effect-refresh-ticks: 1200
+
+  # 0 = イルカの好意 I
+  dolphins-grace-amplifier: 0
+
+
+# 技能成長
+# クリティカル/ファンブル時に自動で成長判定を行う。
+# 成長判定: 1d100 > 現在技能値 で成功。
+skill-growth:
+  enabled: true
+  trigger-critical: true
+  trigger-fumble: true
+  increase: "1d10"
+  max-skill-value: 99
+
+# 二段ジャンプ（跳躍）
+double-jump:
+  enabled: true
+  skill: "jump"
+  cooldown-ms: 700
+  vertical-velocity: 0.68
+  forward-velocity: 0.28
+  special-multiplier: 1.12
+  critical-multiplier: 1.25
+  fumble-downward-velocity: 0.25
+
+# 登攀（蜘蛛の壁登り風）
+climb:
+  enabled: true
+  skill: "climb"
+  wall-check-distance: 0.55
+  vertical-velocity: 0.20
+  wall-stick-velocity: 0.08
+  success-duration-ms: 5000
+  retry-cooldown-ms: 2500
+
+# ドリームランド
+# Paper上では専用ワールドを別ディメンションとして扱います。
+dreamlands:
+  enabled: true
+  world-name: "dreamlands_mythos"
+  # 1 = クトゥルフ神話風の専用地形ジェネレーター
+  terrain-version: 1
+
+  # ベッドで眠った際にドリームランドへ移動する確率（0～100%）。
+  # KPは /dreamland chance <0-100> でゲーム中に変更できます。
+  sleep-teleport-chance: 10.0
+
+  # true: セッション中のみ睡眠・クリスタライザーから侵入可能。
+  # KPの /dreamland tp はこの制限を無視します。
+  require-active-session: true
+
+  # ドリームランド固有生物の自然スポーン
+  mobs:
+    enabled: true
+    # check-interval-ticks ごとに、各プレイヤーについてスポーン抽選を行う確率。
+    spawn-rate-percent: 35.0
+    check-interval-ticks: 100
+    max-near-player: 6
+    min-spawn-distance: 18.0
+    max-spawn-distance: 34.0
+
+  # ドリームランドは常に夜。通常世界の時間には影響しません。
+  always-night: true
+  # 18000 = 真夜中付近
+  night-time: 18000
+
+  # リソースパック不要の青紫の異界月
+  moon:
+    enabled: true
+    # 月の見かけサイズ。2～40。18でかなり大きい。
+    scale: 18.0
+    # プレイヤーから見た月の相対位置
+    horizontal-distance: 42.0
+    height-offset: 34.0
+    # 月の追従更新間隔
+    update-interval-ticks: 10
+
